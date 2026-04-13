@@ -1,0 +1,240 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+<link rel="stylesheet" href="{% static 'css/no_delivery.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<div class="cart-container">
+    <h1 class="cart-title">Корзина покупок</h1>
+
+    {% if cart_items %}
+    <div class="cart-content">
+        <div class="cart-items-section">
+            <!-- Таблица товаров -->
+            <div class="cart-items-header">
+                <div class="header-product">Товар</div>
+                <div class="header-price">Цена</div>
+                <div class="header-quantity">Количество</div>
+                <div class="header-total">Сумма</div>
+                <div class="header-actions"></div>
+            </div>
+
+            <div class="cart-items">
+                {% for item in cart_items %}
+                <div class="cart-item" data-product-id="{{ item.product.id }}"
+                     data-size-id="{{ item.size_obj.id|default:'' }}">
+                    <!-- Изображение и название -->
+                    <div class="item-product">
+                        <div class="item-image">
+                            {% if item.product.images.first %}
+                            <img src="{{ item.product.images.first.image.url }}" alt="{{ item.product.name }}">
+                            {% else %}
+                            <img src="{% static 'images/no-image.jpg' %}" alt="Нет изображения">
+                            {% endif %}
+                        </div>
+                        <div class="item-info">
+                            <a href="{% url 'product_detail' item.product.id %}" class="item-name">
+                                {{ item.product.name }}
+                            </a>
+                            {% if item.size_obj %}  <!-- Изменено с item.size на item.size_obj -->
+                            <div class="item-size">Размер: {{ item.size_obj.size }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Цена -->
+                    <div class="item-price">
+                        <span class="total-label">Цена за штуку: </span>
+                        {{ item.product.price }} тг
+                    </div>
+
+                    <!-- Количество -->
+                    <div class="item-quantity">
+                        <span class="total-label">Количество: </span>
+                        <p>{{item.item.quantity}} штук</p>
+                    </div>
+
+                    <!-- Сумма -->
+                    <div class="item-total">
+                        <span class="total-label">Итоговая сумма:</span>
+                        <span class="total-price">{{ item.item_total }} тг</span>
+                    </div>
+
+                    <!-- Удаление -->
+                    <div class="item-actions">
+                        <form method="post" action="{% url 'cart' %}" class="remove-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                            <input type="hidden" name="size_id" value="{{ item.size_obj.id|default:'' }}">
+                            <!-- Исправлено -->
+                            <input type="hidden" name="action" value="remove">
+                            <button type="submit" class="remove-btn" title="Удалить">
+                                <span class="remove-icon">×</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Продолжить покупки -->
+            <div class="continue-shopping">
+                <a href="{% url 'shop' %}" class="back-to-shop">
+                    ← Продолжить покупки
+                </a>
+            </div>
+        </div>
+
+        <!-- Сумма заказа -->
+        <div class="cart-summary">
+            <h2 class="summary-title">Сумма заказа</h2>
+
+            <div class="summary-row">
+                <span>Товары ({{ cart_total_quantity }})</span>
+                <span>{{ cart_total_price }} тг</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Доставка</span>
+                <span class="free-shipping">Бесплатно</span>
+            </div>
+
+            <div class="summary-total">
+                <span>Итого к оплате:</span>
+                <span class="total-amount">{{ cart_total_price }} тг</span>
+            </div>
+
+
+            <form method="POST" class="flex gap-2 mb-4">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="apply_coupon">
+                <input type="text" name="coupon_code" placeholder="Введите промокод" class="border p-2 rounded w-full">
+                <button type="submit" class="bg-black text-white px-4 py-2 rounded">Применить</button>
+            </form>
+
+            <div class="summary-total">
+                {% if discount_amount > 0 %}
+                <p class="text-green-600">Скидка: -{{ discount_amount }} тг</p>
+                {% endif %}
+                <p class="total-amount">Итого со скидкой: {{ total_with_discount }} тг</p><br>
+            </div>
+
+
+            <div class="summary-note">
+                *Стоимость доставки рассчитывается при оформлении заказа
+            </div>
+
+            <!-- Если не подтверждено, вызываем твой Pop-up (функцию JS) -->
+            <button type="button" onclick="checkAuthAndProceed()"
+                    class="w-full bg-black text-white py-3 rounded-lg font-bold">
+                ОФОРМИТЬ ЗАКАЗ
+                </button>
+
+
+                <!-- Простой Pop-up (Modal) -->
+                <div id="authModal"
+                     class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                    <div class="bg-white rounded-xl max-w-sm w-full p-6 text-center">
+                        <h3 id="modalTitle" class="text-xl font-bold mb-4">Нужна авторизация</h3>
+                        <p id="modalText" class="text-gray-600 mb-6">Чтобы сделать заказ, нужно войти на сайт.</p>
+                        <div class="flex flex-col gap-3">
+                            <a id="modalLink" href="{% url 'login' %}"
+                               class="bg-black text-white py-3 rounded-lg font-bold">Перейти</a>
+                            <button onclick="closeModal()" class="text-gray-400 text-sm">Отмена</button>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function checkAuthAndProceed() {
+                        const isAuthenticated = {{ user.is_authenticated|yesno:"true,false" }};
+                        const hasTelegram = {{ user.telegram_verified|yesno:"true,false" }};
+                        const hasPhone = {% if user.phone %}true{% else %}false{% endif %};
+                        const hasCity = {% if user.city %}true{% else %}false{% endif %}
+                        const hasAdress = {% if user.adress %}true{% else %}false{% endif %}
+
+
+                        const modal = document.getElementById('authModal');
+                        const title = document.getElementById('modalTitle');
+                        const text = document.getElementById('modalText');
+                        const link = document.getElementById('modalLink');
+
+                        // ❌ НЕ АВТОРИЗОВАН
+                        if (!isAuthenticated) {
+                            title.innerText = "Авторизация";
+                            text.innerText = "Пожалуйста, войдите, чтобы продолжить.";
+                            link.innerText = "Войти";
+                            link.href = "{% url 'login' %}";
+                            modal.classList.remove('hidden');
+                            return;
+                        }
+
+                        // ❌ НЕТ TELEGRAM И ТЕЛЕФОНА
+                        if (!hasTelegram | !hasPhone) {
+                            title.innerText = "Подтвердите личность";
+                            text.innerText = "Добавьте телефон и привяжите Telegram.";
+                            link.innerText = "Перейти в профиль";
+                            link.href = "{% url 'profile' %}";
+                            modal.classList.remove('hidden');
+                            return;
+                        }
+
+                        if (!hasCity && !hasAdress) {
+                            title.innerText = "Укажите адресс доставки";
+                            text.innerText = "Добавьте город и адресс";
+                            link.innerText = "Перейти в профиль";
+                            link.href = "{% url 'profile' %}";
+                            modal.classList.remove('hidden');
+                            return;
+                        }
+
+                        // ✅ ВСЁ ОК → ПОКАЗЫВАЕМ POPUP ДОСТАВКИ
+                        title.innerText = "Извините ";
+                            text.innerText = "Мы сейчас не доставляем";
+                            link.innerText = "ОФОРМИТЬ ТЕСТОВЫЙ ЗАКАЗ";
+                            link.href = "{% url 'checkout' %}";
+                            modal.classList.remove('hidden');
+                            return;
+                    }
+
+                    function closeModal() {
+                        document.getElementById('authModal').classList.add('hidden');
+                    }
+                </script>
+
+
+                <div class="payment-methods">
+                    <span>Мы принимаем:</span>
+                    <div class="payment-icons">
+                        <span class="payment-icon">💳</span>
+                        <span class="payment-icon">📱</span>
+                        <span class="payment-icon">🤝</span>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    {% else %}
+    <!-- Пустая корзина -->
+    <div class="empty-cart">
+        <div class="empty-icon">
+            <span>🛒</span>
+        </div>
+        <h2>Ваша корзина пуста</h2>
+        <p>Добавьте товары из каталога</p>
+        <a href="{% url 'shop' %}" class="btn-browse">
+            Перейти в каталог
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/cart.js' %}"></script>
+<script src="{% static 'js/no_delivery.js' %}"></script>
+{% endblock %}

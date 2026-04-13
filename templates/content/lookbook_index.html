@@ -1,0 +1,62 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 md:px-8 py-10">
+
+  <!-- Заголовок страницы -->
+  <div class="text-center mb-12">
+    <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
+      Lookbook Collections
+    </h1>
+    <p class="text-gray-600 text-lg max-w-2xl mx-auto mt-2">
+      Найдите вдохновение в наших тематических коллекциях и сезонных лукбуках.
+    </p>
+  </div>
+
+  <!-- Сетка lookbooks -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+    {% for lb in lookbooks %}
+    <div class="group relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+
+      <!-- Миниатюра (первое изображение) -->
+      {% if lb.images.all %}
+      <a href="{% url 'lookbook_detail' lb.slug %}">
+        <div class="w-full h-64 bg-gray-100 overflow-hidden">
+          <img
+            src="{{ lb.images.all.0.image.url }}"
+            alt="{{ lb.name }}"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          >
+        </div>
+      </a>
+      {% endif %}
+
+      <!-- Название -->
+      <div class="p-6 text-center">
+        <a href="{% url 'lookbook_detail' lb.slug %}" class="block text-2xl font-semibold text-gray-900 hover:text-black transition-colors duration-200">
+          {{ lb.name }}
+        </a>
+
+        <!-- Описание (необязательно) -->
+        {% if lb.description %}
+        <p class="mt-2 text-gray-500 text-sm">
+          {{ lb.description }}
+        </p>
+        {% endif %}
+
+        <!-- Кнопка CTA -->
+        <a href="/products/collection/"
+           class="inline-block mt-4 px-6 py-2 text-sm font-medium uppercase tracking-wide text-black border border-black hover:bg-black hover:text-white transition-colors duration-300">
+          Полная коллекция
+        </a>
+      </div>
+
+    </div>
+    {% endfor %}
+
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+.lookbook-index {
+  margin: 120px 15vw;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.lookbook-link {
+  font-size: 28px;
+  text-decoration: none;
+  color: #000;
+}
+
+.lookbook-link:hover {
+  text-decoration: underline;
+}
+.lookbook-grid {
+  margin: 0 15vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.lookbook-grid img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

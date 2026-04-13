@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Название товара - Магазин одежды</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .product-image {
+            transition: transform 0.3s ease;
+        }
+        .product-image:hover {
+            transform: scale(1.03);
+        }
+        .size-option {
+            transition: all 0.2s ease;
+        }
+        .size-option.selected {
+            border-color: #000;
+            background-color: #f9f9f9;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .accordion-toggle:checked ~ .accordion-content {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-gray-900">
+
+    <!-- Хедер -->
+    <header class="border-b border-gray-200 py-4 px-6 sticky top-0 bg-white z-10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-10">
+                <a href="#" class="text-xl font-bold uppercase tracking-widest">Brand</a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-sm uppercase hover:text-gray-600">Новинки</a>
+                    <a href="#" class="text-sm uppercase hover:text-gray-600">Одежда</a>
+                    <a href="#" class="text-sm uppercase hover:text-gray-600">Аксессуары</a>
+                    <a href="#" class="text-sm uppercase hover:text-gray-600">Коллекции</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="#" class="hover:text-gray-600"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="#" class="hover:text-gray-600"><i class="fa-regular fa-user"></i></a>
+                <a href="#" class="hover:text-gray-600"><i class="fa-solid fa-bag-shopping"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Хлебные крошки -->
+    <div class="max-w-7xl mx-auto px-6 py-4 text-xs uppercase">
+        <nav class="flex space-x-2">
+            <a href="#" class="hover:text-gray-600">Главная</a>
+            <span>/</span>
+            <a href="#" class="hover:text-gray-600">Новинки</a>
+            <span>/</span>
+            <a href="#" class="hover:text-gray-600">Женщины</a>
+            <span>/</span>
+            <span class="text-gray-500">Badge Waffle Long Sleeve T-Shirt</span>
+        </nav>
+    </div>
+
+    <!-- Основной контент -->
+    <main class="max-w-7xl mx-auto px-6 pb-20">
+        <div class="flex flex-col lg:flex-row gap-10">
+            <!-- Галерея изображений -->
+            <div class="lg:w-1/2">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <!-- Миниатюры -->
+                    <div class="hidden md:flex md:flex-col md:col-span-1 gap-4 order-2 md:order-1">
+                        <div class="cursor-pointer border border-gray-200 p-1">
+                            <img src="https://placehold.co/100x120/ffffff/f0f0f0" alt="Thumbnail 1" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="cursor-pointer border border-transparent p-1">
+                            <img src="https://placehold.co/100x120/ffffff/f0f0f0" alt="Thumbnail 2" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="cursor-pointer border border-transparent p-1">
+                            <img src="https://placehold.co/100x120/ffffff/f0f0f0" alt="Thumbnail 3" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="cursor-pointer border border-transparent p-1">
+                            <img src="https://placehold.co/100x120/ffffff/f0f0f0" alt="Thumbnail 4" class="w-full h-auto object-cover">
+                        </div>
+                    </div>
+
+                    <!-- Основное изображение -->
+                    <div class="md:col-span-3 order-1 md:order-2">
+                        <div class="relative overflow-hidden">
+                            <img src="https://placehold.co/600x720/ffffff/f0f0f0" alt="Основное изображение товара" class="w-full h-auto product-image">
+                            <div class="absolute top-4 right-4">
+                                <button class="bg-white rounded-full p-2 shadow-md hover:bg-gray-50">
+                                    <i class="fa-regular fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Информация о товаре -->
+            <div class="lg:w-1/2 py-6">
+                <h1 class="text-2xl md:text-3xl font-medium uppercase tracking-wide">Badge Waffle Long Sleeve T-Shirt</h1>
+                <p class="text-xl text-gray-900 mt-2">25 000 ₸</p>
+
+                <!-- Цвета -->
+                <div class="mt-6">
+                    <p class="text-sm font-medium">Цвет: <span class="text-gray-600">Черный</span></p>
+                    <div class="flex space-x-2 mt-2">
+                        <div class="w-8 h-8 bg-black border border-gray-300 cursor-pointer"></div>
+                        <div class="w-8 h-8 bg-gray-500 border border-gray-300 cursor-pointer"></div>
+                        <div class="w-8 h-8 bg-red-600 border border-gray-300 cursor-pointer"></div>
+                    </div>
+                </div>
+
+                <!-- Размеры -->
+                <div class="mt-6">
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm font-medium">Размер</p>
+                        <a href="#" class="text-xs text-gray-600 underline">Таблица размеров</a>
+                    </div>
+                    <div class="grid grid-cols-5 gap-2 mt-2">
+                        <label class="size-option border border-gray-200 py-2 text-center text-sm cursor-pointer hover:border-gray-400">
+                            <input type="radio" name="size" class="hidden">
+                            <span>XS</span>
+                        </label>
+                        <label class="size-option border border-gray-200 py-2 text-center text-sm cursor-pointer hover:border-gray-400">
+                            <input type="radio" name="size" class="hidden">
+                            <span>S</span>
+                        </label>
+                        <label class="size-option border border-gray-200 py-2 text-center text-sm cursor-pointer hover:border-gray-400 selected">
+                            <input type="radio" name="size" class="hidden" checked>
+                            <span>M</span>
+                        </label>
+                        <label class="size-option border border-gray-200 py-2 text-center text-sm cursor-pointer hover:border-gray-400">
+                            <input type="radio" name="size" class="hidden">
+                            <span>L</span>
+                        </label>
+                        <label class="size-option border border-gray-200 py-2 text-center text-sm cursor-pointer hover:border-gray-400">
+                            <input type="radio" name="size" class="hidden">
+                            <span>XL</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Кнопка добавления в корзину -->
+                <button class="w-full bg-black text-white py-3 mt-6 text-sm uppercase tracking-widest hover:bg-gray-800 transition-colors">
+                    Добавить в корзину
+                </button>
+
+                <!-- Описание -->
+                <div class="mt-6 text-sm">
+                    <p>Длинный рукав с эффектом вафли. Эластичный материал с удобной посадкой. Идеально для повседневной носки.</p>
+
+                    <div class="mt-4 space-y-2">
+                        <div class="flex items-start">
+                            <span class="w-5 mt-0.5">•</span>
+                            <span>Состав: 100% хлопок</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="w-5 mt-0.5">•</span>
+                            <span>Модель носит размер M</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="w-5 mt-0.5">•</span>
+                            <span>Страна производства: Португалия</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Детали доставки -->
+                <div class="mt-6 border-t border-gray-200 pt-4">
+                    <div class="flex items-center text-sm">
+                        <i class="fa-solid fa-truck mr-2"></i>
+                        <span>Бесплатная доставка при заказе от 50 000 ₸</span>
+                    </div>
+                    <div class="flex items-center text-sm mt-2">
+                        <i class="fa-solid fa-arrow-rotate-left mr-2"></i>
+                        <span>Возврат в течение 14 дней</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Дополнительная информация -->
+        <div class="mt-16 border-t border-gray-200 pt-10">
+            <div class="flex border-b border-gray-200">
+                <button class="tab-button py-3 px-6 text-sm font-medium border-b-2 border-black">Описание</button>
+                <button class="tab-button py-3 px-6 text-sm font-medium text-gray-500">Доставка и возврат</button>
+                <button class="tab-button py-3 px-6 text-sm font-medium text-gray-500">Уход</button>
+            </div>
+
+            <div class="tab-content active py-6 text-sm">
+                <p>Футболка с длинным рукавом из вафельной ткани — это универсальный предмет гардероба, который можно носить как самостоятельно, так и подкладывать под другие вещи. Модель имеет классический крой и выполнена из высококачественного хлопка, обеспечивающего комфорт в течение всего дня.</p>
+
+                <div class="mt-6 space-y-4">
+                    <label class="accordion-item block border-b border-gray-200 pb-4">
+                        <input type="checkbox" class="accordion-toggle hidden">
+                        <div class="flex justify-between items-center cursor-pointer">
+                            <span class="font-medium">Детали</span>
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                        <div class="accordion-content mt-2 text-gray-600">
+                            <p>Классический крой, круглый вырез, манжеты на рукавах и подоле. Материал имеет текстуру вафли, что придает изделию особый стиль.</p>
+                        </div>
+                    </label>
+
+                    <label class="accordion-item block border-b border-gray-200 pb-4">
+                        <input type="checkbox" class="accordion-toggle hidden">
+                        <div class="flex justify-between items-center cursor-pointer">
+                            <span class="font-medium">Размеры модели</span>
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                        <div class="accordion-content mt-2 text-gray-600">
+                            <p>Рост модели: 178 см. Размер на модели: M.</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Похожие товары -->
+        <div class="mt-16">
+            <h2 class="text-xl font-medium uppercase tracking-wide mb-6">Вам может понравиться</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Товар 1 -->
+                <div class="group cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] bg-gray-100 overflow-hidden">
+                        <img src="https://placehold.co/300x400/ffffff/f0f0f0" alt="Похожий товар" class="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-300 absolute">
+                        <img src="https://placehold.co/300x400/f0f0f0/dddddd" alt="Похожий товар" class="w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                    <div class="mt-2 text-center px-1">
+                        <h3 class="text-xs font-medium text-gray-900 uppercase truncate">Basic Cotton T-Shirt</h3>
+                        <p class="text-xs text-gray-600 mt-0.5">18 000 ₸</p>
+                    </div>
+                </div>
+
+                <!-- Товар 2 -->
+                <div class="group cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] bg-gray-100 overflow-hidden">
+                        <img src="https://placehold.co/300x400/ffffff/f0f0f0" alt="Похожий товар" class="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-300 absolute">
+                        <img src="https://placehold.co/300x400/f0f0f0/dddddd" alt="Похожий товар" class="w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                    <div class="mt-2 text-center px-1">
+                        <h3 class="text-xs font-medium text-gray-900 uppercase truncate">Oversized Hoodie</h3>
+                        <p class="text-xs text-gray-600 mt-0.5">32 000 ₸</p>
+                    </div>
+                </div>
+
+                <!-- Товар 3 -->
+                <div class="group cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] bg-gray-100 overflow-hidden">
+                        <img src="https://placehold.co/300x400/ffffff/f0f0f0" alt="Похожий товар" class="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-300 absolute">
+                        <img src="https://placehold.co/300x400/f0f0f0/dddddd" alt="Похожий товар" class="w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                    <div class="mt-2 text-center px-1">
+                        <h3 class="text-xs font-medium text-gray-900 uppercase truncate">Cargo Pants</h3>
+                        <p class="text-xs text-gray-600 mt-0.5">45 000 ₸</p>
+                    </div>
+                </div>
+
+                <!-- Товар 4 -->
+                <div class="group cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] bg-gray-100 overflow-hidden">
+                        <img src="https://placehold.co/300x400/ffffff/f0f0f0" alt="Похожий товар" class="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-300 absolute">
+                        <img src="https://placehold.co/300x400/f0f0f0/dddddd" alt="Похожий товар" class="w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                    <div class="mt-2 text-center px-1">
+                        <h3 class="text-xs font-medium text-gray-900 uppercase truncate">Denim Jacket</h3>
+                        <p class="text-xs text-gray-600 mt-0.5">52 000 ₸</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="bg-gray-50 border-t border-gray-200 py-12 px-6 mt-20">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-sm font-medium uppercase tracking-widest mb-4">Магазин</h3>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li><a href="#" class="hover:text-gray-900">Новинки</a></li>
+                    <li><a href="#" class="hover:text-gray-900">Одежда</a></li>
+                    <li><a href="#" class="hover:text-gray-900">Аксессуары</a></li>
+                    <li><a href="#" class="hover:text-gray-900">Коллекции</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-sm font-medium uppercase tracking-widest mb-4">Информация</h3>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li><a href="#" class="hover:text-gray-900">О нас</a></li>
+                    <li><a href="#" class="hover:text-gray-900">Контакты</a></li>
+                    <li><a href="#" class="hover:text-gray-900">Доставка</a></li>
+                    <li><a href="#" class="hover:text-gray-900">Возврат</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-sm font-medium uppercase tracking-widest mb-4">Помощь</h3>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li><a href="#" class="hover:text-gray-900">FAQ</a></li>
+                    <li><a href="#" class="hover:text-gray-900">Таблица размеров</a></li>
+                    <li><a href="#" class="hover:text-gray-900">Уход за одеждой</a></li>
+                    <li><a href="#" class="hover:text-gray-900">Политика конфиденциальности</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-sm font-medium uppercase tracking-widest mb-4">Подписка</h3>
+                <p class="text-sm text-gray-600 mb-4">Подпишитесь на рассылку, чтобы первыми узнавать о новинках и специальных предложениях.</p>
+                <form class="flex">
+                    <input type="email" placeholder="Ваш email" class="px-4 py-2 text-sm border border-gray-300 flex-grow">
+                    <button type="submit" class="bg-black text-white px-4 py-2 text-sm">→</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto border-t border-gray-200 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-xs text-gray-600">© 2023 Brand. Все права защищены.</p>
+            <div class="flex space-x-4 mt-4 md:mt-0">
+                <a href="#" class="text-gray-600 hover:text-gray-900"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="text-gray-600 hover:text-gray-900"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="text-gray-600 hover:text-gray-900"><i class="fa-brands fa-vk"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Простой JavaScript для работы интерфейса
+        document.addEventListener('DOMContentLoaded', function() {
+            // Выбор размера
+            const sizeOptions = document.querySelectorAll('.size-option');
+            sizeOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    sizeOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    this.querySelector('input[type="radio"]').checked = true;
+                });
+            });
+
+            // Табы
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach((button, index) => {
+                button.addEventListener('click', function() {
+                    // Убираем активные классы у всех кнопок и контента
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('border-black', 'text-gray-900');
+                        btn.classList.add('text-gray-500');
+                    });
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Добавляем активные классы к текущей кнопке и контенту
+                    this.classList.add('border-black', 'text-gray-900');
+                    this.classList.remove('text-gray-500');
+
+                    if (tabContents[index]) {
+                        tabContents[index].classList.add('active');
+                    }
+                });
+            });
+
+            // Аккордеон
+            const accordionToggles = document.querySelectorAll('.accordion-toggle');
+            accordionToggles.forEach(toggle => {
+                toggle.addEventListener('change', function() {
+                    const icon = this.closest('.accordion-item').querySelector('.fa-plus');
+                    if (this.checked) {
+                        icon.classList.replace('fa-plus', 'fa-minus');
+                    } else {
+                        icon.classList.replace('fa-minus', 'fa-plus');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

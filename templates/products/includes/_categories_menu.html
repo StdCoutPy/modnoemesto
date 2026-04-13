@@ -1,0 +1,24 @@
+
+<!-- Центральная колонка - основные категории -->
+<div class="category-section">
+    {% for category in header_main_categories %}
+        <div class="main-category">
+            <a href="{% url 'category_detail' category.slug %}"
+               class="category-link main-category-link {% if category.slug == active_category %}active{% endif %}">
+                {{ category.name }}
+            </a>
+
+            <!-- Подкатегории -->
+            {% if category.children.all %}
+                <div class="subcategories">
+                    {% for child in category.children.all %}
+                        <a href="{% url 'category_detail' child.slug %}"
+                           class="subcategory-link {% if child.slug == active_category %}active{% endif %}">
+                            {{ child.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>

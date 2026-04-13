@@ -1,0 +1,34 @@
+{%load static%}
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <title>Перенаправление на оплату...</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/freeom_favicon.svg' %}">
+
+</head>
+<body>
+    <div style="text-align: center; margin-top: 100px; font-family: sans-serif;">
+        <h2>Секунду...</h2>
+        <p>Перенаправляем вас на защищенную страницу оплаты Freedom Pay Sandbox.</p>
+
+        <form id="pay_form" action="{{ pay_url }}" method="POST">
+            {% csrf_token %}
+            {% for key, value in params.items %}
+                <input type="hidden" name="{{ key }}" value="{{ value }}">
+            {% endfor %}
+            <noscript>
+                <p>Ваш браузер не поддерживает JavaScript. Нажмите на кнопку ниже, чтобы продолжить:</p>
+                <input type="submit" value="Перейти к оплате">
+            </noscript>
+        </form>
+
+    </div>
+
+    <script type="text/javascript">
+        // Автоматическая отправка формы при загрузке страницы
+        document.getElementById('pay_form').submit();
+    </script>
+</body>
+</html>

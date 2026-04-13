@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Коллекции - Modnoe Mesto{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+
+
+    
+    <!-- Основные категории -->
+    <div class="mb-12">
+        <h2 class="text-xl font-semibold mb-4">КАТЕГОРИИ</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {% for category in header_main_categories %}
+            <a href="{% url 'category_detail' category.slug %}" 
+               class="bg-gray-100 p-6 text-center hover:bg-gray-200 transition duration-300">
+                <h3 class="font-medium">{{ category.name }}</h3>
+                {% if category.children.all %}
+                <p class="text-sm text-gray-600 mt-2">
+                    {% for child in category.children.all|slice:":3" %}
+                    {{ child.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                {% endif %}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Специальные разделы -->
+    <div class="mb-12">
+        <h2 class="text-xl font-semibold mb-4">СПЕЦИАЛЬНЫЕ РАЗДЕЛЫ</h2>
+        <div class="grid grid-cols-2 gap-4">
+            <a href="{% url 'new_arrivals' %}"
+               class="bg-black text-white p-8 text-center hover:bg-gray-800 transition duration-300">
+                <h3 class="font-bold text-lg">НОВИНКИ</h3>
+            </a>
+            <a href="{% url 'sale' %}"
+               class="bg-red-600 text-white p-8 text-center hover:bg-red-700 transition duration-300">
+                <h3 class="font-bold text-lg">СКИДКИ</h3>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

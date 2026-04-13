@@ -1,0 +1,175 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Главная | Итальянская и французская одежда{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="/static/css/animations.css">
+{% endblock %}
+
+{% block content %}
+    <!-- Бегущая строка -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <div class="marquee-content">🇮🇹 MADE IN ITALY • 🇫🇷 PARISIAN STYLE • 🇮🇹 QUALITÀ ITALIANA • 🇫🇷 HAUTE COUTURE •
+                🇮🇹 MILANO • 🇫🇷 PARIS • 🇮🇹 ITALIAN LEATHER • 🇫🇷 FRENCH ELEGANCE •
+            </div>
+            <div class="marquee-content" aria-hidden="true">🇮🇹 MADE IN ITALY • 🇫🇷 PARISIAN STYLE • 🇮🇹 QUALITÀ ITALIANA •
+                🇫🇷 HAUTE COUTURE • 🇮🇹 MILANO • 🇫🇷 PARIS • 🇮🇹 ITALIAN LEATHER • 🇫🇷 FRENCH ELEGANCE • 🇮🇹 MADE IN ITALY •
+                🇫🇷 PARISIAN STYLE • 🇮🇹 QUALITÀ ITALIANA •
+            </div>
+        </div>
+    </div>
+
+    <!-- Полноэкранный Hero Section -->
+    <section
+            class="h-screen w-full bg-black flex items-center justify-center overflow-hidden relative parallax-container">
+        <div class="absolute inset-0 z-0">
+            <img src="/static/images/hero-italian-fashion.jpg" alt="Итальянская мода"
+                 class="w-full h-full object-cover opacity-70 parallax-item"
+                 data-parallax-rate="0.4">
+        </div>
+
+        <div class="absolute inset-0 flex items-center justify-center text-center px-4 z-10">
+            <div class="text-white">
+                <span class="text-sm md:text-base tracking-widest opacity-90 mb-4 block animate-fadeInUp">ИТАЛЬЯНСКИЙ СИЛУЭТ</span>
+                <h2 class="text-4xl md:text-7xl font-light uppercase tracking-widest mb-6 animate-fadeInUp animate-delay-200">
+                    COLLECTION<br>PARIS-MILAN
+                </h2>
+                <p class="text-lg md:text-xl mb-10 tracking-widest opacity-90 animate-fadeInUp animate-delay-400">
+                    ФРАНЦУЗСКАЯ ИЗЫСКАННОСТЬ</p>
+                <a class="px-10 py-4 border border-white text-white uppercase tracking-widest text-sm
+                          hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105
+                          animate-fadeInUp animate-delay-600" href="{% url 'collection' %}">
+                    Открыть коллекцию
+                </a>
+            </div>
+        </div>
+
+        <!-- Анимированный индикатор скролла -->
+<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white z-10 flex flex-col items-center">
+    <span class="text-m tracking-widest mb-2 animate-bounce">SCROLL</span>
+    <div class="w-px h-10 bg-white animate-bounce"></div>
+</div>
+    </section>
+
+
+
+
+
+
+
+<!-- ДРАМАТИЧНЫЙ MADE IN ITALY -->
+<section class="min-h-screen bg-white text-black flex items-center">
+
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 px-8 items-center">
+
+        <!-- 1. The Wrapper (Creates 3D space) -->
+<div class="relative group [perspective:1500px]">
+
+    <!-- 2. The Card (Handles the rotation) -->
+    <div class="relative w-full h-[85vh] transition-all duration-700 ease-out
+                [transform-style:preserve-3d]
+                group-hover:[transform:rotateX(5deg)_rotateY(-10deg)_scale(1.02)]">
+
+        <!-- 3. The Image -->
+        <img src="/static/images/mm_2025_2.png"
+            class="w-full h-full object-cover shadow-xl"
+             alt="Craftsmanship">
+
+
+
+    </div>
+</div>
+
+
+
+        <div>
+            <span class="tracking-[0.5em] text-xs opacity-50 block mb-6">
+                MADE IN ITALY
+            </span>
+
+            <h2 class="text-4xl md:text-6xl font-light uppercase mb-10 leading-tight">
+                Precision<br>& Craft
+            </h2>
+
+            <p class="text-gray-600 max-w-md leading-relaxed mb-12">
+                Каждая модель создаётся вручную мастерами Милана.
+                Чистые линии, премиальные ткани и баланс формы.
+            </p>
+
+            <a href="{% url 'about' %}" class="border-b border-black pb-2 tracking-[0.3em] text-sm
+                              hover:opacity-60 transition">
+                Больше Информации
+            </a>
+        </div>
+
+    </div>
+
+</section>
+<!-- ВИЗУАЛЬНЫЙ РАЗРЫВ -->
+<section class="h-[70vh] bg-black flex items-center justify-center text-white text-center">
+
+    <div class="animate-float" style="animation-delay: 0.6s">
+        <h3 class="text-4xl md:text-6xl font-light uppercase mb-6 ">
+            SILHOUETTE
+        </h3>
+        <p class="text-gray-400 tracking-[0.3em] text-xs">
+            STRUCTURE — BALANCE — POWER
+        </p>
+    </div>
+
+</section>
+
+    <!-- Интерактивная галерея -->
+    <section class="h-screen w-full bg-black relative">
+        <div class="grid grid-cols-3 h-full">
+            {% for i in "123"|make_list %}
+                <div class="relative overflow-hidden group">
+                    <img src="/static/images/gallery-{{ i }}.jpg" alt="Gallery {{ i }}"
+                         class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition duration-700"></div>
+                    <div class="absolute bottom-8 left-8 text-white transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-700">
+                        <h4 class="text-xl uppercase tracking-widest mb-2">0{{ i }}</h4>
+                        <p class="text-sm tracking-widest opacity-90">COLLECTION</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+
+
+
+    <!-- Анимированные преимущества -->
+    <section class="pt-40 pb-40 w-full bg-black flex items-center justify-center ">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16 max-w-7xl mx-auto px-4 text-white text-center">
+            <div class="animate-float" style="animation-delay: 0.2s">
+                <span class="text-4xl mb-4 block">🇮🇹</span>
+                <h4 class="uppercase tracking-widest mb-4">Итальянские ткани</h4>
+                <p class="text-gray-400 text-sm">Только премиальные материалы</p>
+            </div>
+            <div class="animate-float" style="animation-delay: 0.4s">
+                <span class="text-4xl mb-4 block">🇫🇷</span>
+                <h4 class="uppercase tracking-widest mb-4">Французский дизайн</h4>
+                <p class="text-gray-400 text-sm">Авторские модели от парижских дизайнеров</p>
+            </div>
+            <div class="animate-float" style="animation-delay: 0.6s">
+                <span class="text-4xl mb-4 block">✈️</span>
+                <h4 class="uppercase tracking-widest mb-4">Доставка из Европы</h4>
+                <p class="text-gray-400 text-sm">Прямые поставки из Италии и Франции</p>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block extrafooter %}
+    <footer class="bg-black text-white text-center py-10 text-sm -mt-8">
+
+        <p>2025 Modnoe Mesto. Все права защищены.</p>
+    </footer>
+{% endblock%}
+
+{% block extra_js %}
+    <script src="/static/js/animations.js"></script>
+{% endblock %}

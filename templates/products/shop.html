@@ -1,0 +1,90 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="shop-container">
+    <!-- Левая колонка с меню категорий -->
+    <aside class="sidebar">
+        {% include 'products/includes/_categories_menu.html' %}
+    </aside>
+
+    <!-- Правая колонка с товарами -->
+    <main class="products-main">
+        <div class="page-header">
+            <h1 class="page-title">
+                {% if show_new %}
+                    НОВИНКИ
+                {% elif show_sale %}
+                    СКИДКИ
+                {% elif active_category %}
+                    {% for cat in main_categories %}
+                        {% if cat.slug == active_category %}{{ cat.name }}{% endif %}
+                    {% endfor %}
+                    {% for collection in collections %}
+                        {% if collection.slug == active_category %}{{ collection.name }}{% endif %}
+                    {% endfor %}
+                {% else %}
+                    ВСЕ ТОВАРЫ
+                {% endif %}
+            </h1>
+
+            {% if products.count > 0 %}
+                <div class="products-count">
+                    Найдено товаров: {{ products.count }}
+                </div>
+            {% endif %}
+        </div>
+
+        {% if products.count > 0 %}
+            <div class="products-grid">
+                {% for product in products %}
+                    <a href="{% url 'product_detail' product.id %}"><div class="product-card">
+                        <div class="product-image-container">
+                            {% with product.images.first as main_image %}
+                                {% if main_image %}
+                                    <img src="{{ main_image.image.url }}"
+                                         alt="{{ product.name }}"
+                                         class="product-image">
+                                {% else %}
+                                    <div class="product-image-placeholder">
+                                        <span>Нет изображения</span>
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
+
+                            <div class="product-badges">
+                                {% if product.is_new %}
+                                    <span class="badge new">NEW</span>
+                                {% endif %}
+                                {% if product.is_discounted %}
+                                    <span class="badge sale">SALE</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="product-info">
+                            <h3 class="product-name">{{ product.name }}</h3>
+                            <p class="product-price">{% if product.price %}
+                {{ product.price }} тг.
+                {% else %}
+                Скоро поступление
+                {% endif %}</p>
+                            {% if product.short_description %}
+                                <p class="product-description">{{ product.short_description }}</p>
+                            {% endif %}
+                        </div>
+                    </div></a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-products">
+                <p>Товары не найдены.</p>
+                {% if search_query %}
+                    <p>Попробуйте изменить поисковый запрос или <a href="{% url 'shop' %}">посмотреть все товары</a>.</p>
+                {% else %}
+                    <p><a href="{% url 'shop' %}">Вернуться к каталогу</a></p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </main>
+</div>
+{% endblock %}

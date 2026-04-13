@@ -1,0 +1,380 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>{% block title %}Modnoe Mesto{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com/3.3.0"></script>
+
+
+<!-- 1. Apple-иконка (только для iOS/Android при сохранении на экран) -->
+<link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}?v=2">
+
+<!-- 2. Универсальная иконка (запасной вариант для старых браузеров) -->
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/apple-touch-icon.png' %}">
+
+<!-- 3. SVG иконка (Основная для современных ПК браузеров) -->
+<link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+
+<link rel="manifest" href="{% static 'manifest.json' %}">
+
+    <!-- Название приложения под иконкой на главном экране -->
+    <meta name="apple-mobile-web-app-title" content="ModnoeMesto">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobileMenu.css' %}">
+    <link rel="stylesheet" href="{% static 'css/categories.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dropdown.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+
+
+    {% block extra_head %}{% endblock %}
+    {% block extra_css %}{% endblock %}
+
+</head>
+
+<body class="font-sans text-gray-900">
+<div class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full h-[52px] z-50 bg-white shadow-md">
+        <div class="px-4 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-widest">
+                <a href="{% url 'index' %}" class="hover:underline">MODNOE MESTO</a>
+            </h1>
+
+            <nav class="hidden md:flex space-x-6">
+                <!-- Коллекции -->
+                <div class="relative group" id="collections-menu">
+                    <a href="{% url 'collection' %}" class="hover:underline flex items-center">
+                        Коллекции
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </a>
+                    <div class="absolute left-0 top-full mt-2 w-80 bg-white shadow-lg rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 "
+                         id="collections-dropdown">
+                        <div class="p-4">
+                            <!-- Коллекции -->
+                            <div class="mb-4">
+                                <div class="space-y-1">
+                                    {% for collection in header_collections %}
+                                    <a href="{% url 'category_detail' collection.slug %}"
+                                       class="block py-1 text-gray-700 hover:text-black transition duration-200">
+                                        {{ collection.name }}
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Основные категории -->
+                            <div class="mb-4">
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
+                                    КАТЕГОРИИ</h3>
+                                <div class="space-y-1">
+
+                                    {% for category in header_main_categories %}
+                                    {% if not category.children.all %}
+                                    <a href="{% url 'category_detail' category.slug %}"
+                                       class="block py-1 text-gray-700 hover:text-black transition duration-200">
+                                        {{ category.name }}
+                                    </a>
+
+                                    {% else %}
+                                    <!-- Категория с подкатегориями (Одежда, Аксессуары и т.д.) -->
+                                    <div class="category-with-submenu relative group/sub">
+                                        <!-- Теперь это ссылка <a> вместо <div> -->
+                                        <a href="{% url 'category_detail' category.slug %}"
+                                           class="flex justify-between items-center py-1 text-gray-700 hover:text-black transition duration-200 cursor-pointer">
+                                            <span>{{ category.name }}</span>
+                                            <svg class="w-3 h-3 transform transition-transform duration-200 group-hover/sub:rotate-90"
+                                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M9 5l7 7-7 7"
+                                                "")/>>
+                                            </svg>
+                                        </a>
+                                        <!-- Выпадающее подменю справа -->
+                                        <div class="submenu-container invisible opacity-0 group-hover/sub:visible group-hover/sub:opacity-100 absolute left-full top-0 ml-0 w-64 bg-white shadow-lg rounded-xl p-4 transition-all duration-200 border border-gray-100 z-[60]">
+                                            {% for child in category.children.all %}
+                                            <a href="{% url 'category_detail' child.slug %}"
+                                               class="block py-1 text-gray-700 hover:text-black transition duration-200">
+                                                {{ child.name }}
+                                            </a>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                    <!-- ДОБАВЛЯЕМ НОВИНКИ И СКИДКИ (на том же уровне) -->
+                                    <div class="pt-1 mt-1 border-t border-gray-50">
+                                        <a href="/products/new/"
+                                           class="block py-1 text-blue-600 font-medium hover:text-blue-800 transition duration-200">
+                                            Новинки
+                                        </a>
+                                        <a href="/products/sale/"
+                                           class="block py-1 text-red-600 font-medium hover:text-red-800 transition duration-200">
+                                            Скидки %
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="{% url 'about' %}" class="hover:underline">О нас</a>
+                <a href="{% url 'lookbook_index' %}" class="hover:underline">Каталог</a>
+
+                <!-- Помощь вместо Контактов -->
+                <button id="help-btn" class="hover:underline focus:outline-none">
+                    Помощь
+                </button>
+
+                <!-- Корзина -->
+                <!-- Пример добавления в навигацию -->
+                <div class="header-actions">
+                    <a href="{% url 'cart' %}" class="cart-link">
+                        <span class="cart-icon">🛒</span>
+                        <!--{% if cart_total_quantity and cart_total_quantity > 0 %}
+                        <span class="cart-counter">{{ cart_total_quantity }}</span>
+                        {% endif %}-->
+                    </a>
+                </div>
+
+
+                <!-- Профиль -->
+                {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}" class="hover:underline flex items-center space-x-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    <span>Профиль</span>
+                </a>
+                {% else %}
+                <a href="{% url 'login' %}" class="hover:underline flex items-center space-x-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                    </svg>
+                    <span>Войти</span>
+                </a>
+                {% endif %}
+            </nav>
+
+            <button id="menu-toggle" class="md:hidden text-gray-800 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2 max-h-[80vh] overflow-y-auto">
+            <div>
+                <button onclick="toggleSubmenu('mobile-collections-submenu')"
+                        class="w-full text-left text-gray-700 font-medium flex justify-between items-center py-2">
+                    Коллекции
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2"
+                         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
+                <div id="mobile-collections-submenu" class="hidden mt-2 ml-4 space-y-1">
+                    <!-- Коллекции для мобильных -->
+                    {% for collection in header_collections %}
+                    <a href="{% url 'category_detail' collection.slug %}" class="block text-gray-600 py-1">
+                        {{ collection.name }}
+                    </a>
+                    {% endfor %}
+
+                    <!-- Основные категории для мобильных -->
+                    {% for category in header_main_categories %}
+                    {% if not category.children.all %}
+                    <a href="{% url 'category_detail' category.slug %}" class="block text-gray-600 py-1">
+                        {{ category.name }}
+                    </a>
+                    {% else %}
+                    <div class="mt-2">
+                        <button onclick="toggleSubmenu('mobile-{{ category.slug }}-submenu', event)"
+                                class="w-full text-left text-gray-600 flex justify-between items-center py-1">
+                            {{ category.name }}
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2"
+                                 viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </button>
+                        <div id="mobile-{{ category.slug }}-submenu" class="hidden mt-1 ml-4 space-y-1">
+                            {% for child in category.children.all %}
+                            <a href="{% url 'category_detail' child.slug %}" class="block text-gray-600 py-1 text-sm">
+                                {{ child.name }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    <!-- ДОБАВЛЯЕМ НОВИНКИ И СКИДКИ (на том же уровне) -->
+                    <div class="block text-gray-800 py-1 ">
+                        <a href="/products/new/"
+                           class=" bg-gray-100 p-6 text-center hover:bg-gray-200 transition duration-300">
+                            Новинки
+                        </a>
+                        <a href="/products/sale/"
+                           class="bg-gray-100 p-6 text-center hover:bg-gray-200 transition duration-300">
+                            Скидки %
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <a href="{% url 'about' %}" class="block text-gray-700 hover:text-black py-2">О нас</a>
+            <a href="{% url 'lookbook_index' %}" class="block text-gray-700 hover:text-black py-2">Каталог</a>
+            <button onclick="openChat()" class="block text-gray-700 hover:text-black py-2 w-full text-left">Помощь
+            </button>
+            <a href="{% url 'cart' %}" class="block text-gray-700 hover:text-black py-2">Корзина 🛒</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="block text-gray-700 hover:text-black py-2">Профиль</a>
+            <a href="{% url 'logout' %}" class="block text-gray-700 hover:text-black py-2">Выйти</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="block text-gray-700 hover:text-black py-2">Войти</a>
+            <a href="{% url 'register' %}" class="block text-gray-700 hover:text-black py-2">Регистрация</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="pt-[52px] flex-grow">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+
+    {% block extrafooter %}
+    <footer class="bg-black text-white text-center justify-space-between py-10 text-sm mt-8">
+
+
+        <p class="opacity-70">© 2025 Modnoe Mesto. Все права защищены.</p>
+    </footer>
+{% endblock %}
+
+
+
+</div>
+
+<!-- Подключаем чат-помощник -->
+{% include 'chat/chat_assistant.html' %}
+
+<!-- JS для меню -->
+<script>
+    // Универсальная функция для переключения подменю
+    function toggleSubmenu(submenuId, event) {
+        if (event) {
+            event.stopPropagation();
+        }
+        const submenu = document.getElementById(submenuId);
+        submenu.classList.toggle('hidden');
+    }
+
+    // Функция для основного мобильного меню
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.classList.toggle('hidden');
+    }
+
+    // Функция открытия чата (для мобильного меню)
+    function openChat() {
+        const chat = document.getElementById('chat-assistant');
+        if (chat) {
+            chat.classList.add('active');
+        }
+    }
+
+    // Закрытие меню при клике вне его
+    document.addEventListener('click', function(event) {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuToggle = document.getElementById('menu-toggle');
+
+        if (mobileMenu && !mobileMenu.classList.contains('hidden') &&
+            !mobileMenu.contains(event.target) &&
+            !menuToggle.contains(event.target)) {
+            mobileMenu.classList.add('hidden');
+        }
+    });
+
+    // Дополнительная логика для десктопного меню коллекций
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuToggle = document.getElementById('menu-toggle');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', toggleMobileMenu);
+        }
+
+        const collectionsMenu = document.getElementById('collections-menu');
+        const collectionsDropdown = document.getElementById('collections-dropdown');
+
+        if (collectionsMenu && collectionsDropdown) {
+            let menuTimeout;
+
+            // При наведении на меню - показываем dropdown
+            collectionsMenu.addEventListener('mouseenter', function() {
+                clearTimeout(menuTimeout);
+                collectionsDropdown.classList.remove('opacity-0', 'invisible');
+                collectionsDropdown.classList.add('opacity-100', 'visible');
+            });
+
+            // При уходе с меню - скрываем dropdown с задержкой
+            collectionsMenu.addEventListener('mouseleave', function() {
+                menuTimeout = setTimeout(function() {
+                    collectionsDropdown.classList.remove('opacity-100', 'visible');
+                    collectionsDropdown.classList.add('opacity-0', 'invisible');
+                }, 150);
+            });
+
+            // При наведении на dropdown - отменяем скрытие
+            collectionsDropdown.addEventListener('mouseenter', function() {
+                clearTimeout(menuTimeout);
+            });
+
+            // При уходе с dropdown - скрываем его
+            collectionsDropdown.addEventListener('mouseleave', function() {
+                menuTimeout = setTimeout(function() {
+                    collectionsDropdown.classList.remove('opacity-100', 'visible');
+                    collectionsDropdown.classList.add('opacity-0', 'invisible');
+                }, 150);
+            });
+        }
+    });
+</script>
+
+<!-- Подключаем JS для чата -->
+<script src="{% static 'js/chat.js' %}"></script>
+<script src="{% static 'js/animations.js' %}"></script>
+
+
+<!-- Вставьте этот код прямо перед закрывающим тегом </body> в base.html -->
+<script>
+    // Отладочный код
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('=== DEBUG INFO ===');
+        console.log('Help button:', document.getElementById('help-btn'));
+        console.log('Chat assistant:', document.getElementById('chat-assistant'));
+        console.log('Close chat:', document.getElementById('close-chat'));
+        console.log('Chat input:', document.getElementById('chat-input'));
+        console.log('Send button:', document.getElementById('send-message'));
+        console.log('Chat messages:', document.querySelector('.chat-messages'));
+        console.log('Quick questions:', document.querySelectorAll('.quick-question').length);
+        console.log('==================');
+    });
+</script>
+
+{% block extra_js %}{% endblock %}
+</body>
+</html>

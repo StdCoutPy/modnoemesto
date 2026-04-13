@@ -1,0 +1,397 @@
+/* Основные стили корзины */
+.cart-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.cart-title {
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+/* Сетка корзины */
+.cart-content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+}
+
+/* Левая колонка - товары */
+.cart-items-section {
+    background: white;
+    border-radius: 8px;
+    padding: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.cart-items-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    gap: 20px;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    font-weight: 600;
+    color: #666;
+    font-size: 14px;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    gap: 20px;
+    padding: 25px 20px;
+    border-bottom: 1px solid #f5f5f5;
+    align-items: center;
+}
+
+.cart-item:hover {
+    background: #fafafa;
+}
+
+/* Стили для товара */
+.item-product {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.item-image {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.item-name:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.item-size {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.item-price-mobile {
+    display: none;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Цена */
+.item-price {
+    font-size: 16px;
+    color: #333;
+}
+
+.price-label {
+    display: none;
+}
+
+/* Количество */
+.item-quantity .quantity-controls {
+    display: flex;
+    align-items: center;
+    width: 120px;
+}
+
+.item-quantity .quantity-btn {
+    width: 36px;
+    height: 36px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.item-quantity .quantity-btn:hover {
+    background: #e0e0e0;
+}
+
+.item-quantity .quantity-input {
+    width: 50px;
+    height: 36px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 0 5px;
+    font-size: 16px;
+}
+
+/* Сумма */
+.item-total {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.total-label {
+    display: none;
+}
+
+/* Удаление */
+.remove-btn {
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.remove-btn:hover {
+    color: #ff4444;
+    border-color: #ffcccc;
+    background: #fff5f5;
+}
+
+.remove-icon {
+    line-height: 1;
+}
+
+/* Кнопка продолжить покупки */
+.continue-shopping {
+    padding: 20px;
+}
+
+.back-to-shop {
+    color: #666;
+    text-decoration: none;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-to-shop:hover {
+    color: #333;
+}
+
+/* Правая колонка - сумма */
+.cart-summary {
+    background: white;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.summary-title {
+    font-size: 20px;
+    margin-bottom: 25px;
+    color: #333;
+    font-weight: 500;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #666;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.total-amount {
+    color: #333;
+    font-size: 24px;
+}
+
+.free-shipping {
+    color: #4CAF50;
+    font-weight: 500;
+}
+
+.summary-note {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+/* Кнопка оформления */
+.btn-checkout {
+    width: 100%;
+    padding: 18px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 25px;
+    transition: background 0.3s;
+}
+
+.btn-checkout:hover {
+    background: #555;
+}
+
+/* Методы оплаты */
+.payment-methods {
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #666;
+}
+
+.payment-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.payment-icon {
+    font-size: 24px;
+}
+
+/* Пустая корзина */
+.empty-cart {
+    text-align: center;
+    padding: 80px 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.empty-icon {
+    font-size: 80px;
+    margin-bottom: 30px;
+    opacity: 0.2;
+}
+
+.empty-cart h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 300;
+}
+
+.empty-cart p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.btn-browse {
+    display: inline-block;
+    padding: 15px 40px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.btn-browse:hover {
+    background: #555;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 992px) {
+    .cart-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .cart-summary {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .cart-items-header {
+        display: none;
+    }
+
+    .cart-item {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 20px;
+        position: relative;
+        border: 1px solid #eee;
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+
+    .item-product {
+        grid-column: 1;
+    }
+
+    .item-price, .item-quantity, .item-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-top: 1px dashed #eee;
+    }
+
+    .price-label, .total-label {
+        display: inline;
+        font-weight: 500;
+        color: #666;
+    }
+
+    .item-price-mobile {
+        display: block;
+    }
+
+    .item-price .price-label {
+        display: none;
+    }
+
+    .item-actions {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+}
+
+

@@ -1,0 +1,82 @@
+<!-- templates/main/chat_assistant.html -->
+<div id="chat-assistant" class="chat-container">
+    <div class="chat-window">
+
+        <!-- Заголовок чата -->
+        <div class="chat-header">
+            <div class="flex items-center space-x-3">
+                <div class="assistant-avatar">
+                    <div class="avatar-gif"></div>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-sm">Помощник Modnoe Mesto</h3>
+                    <p class="text-xs text-gray-300">отвечает онлайн</p>
+                </div>
+            </div>
+            <button id="close-chat" class="close-btn">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Область сообщений -->
+        <div id="chat-messages" class="chat-messages">
+            <div class="message assistant-message">
+                <div class="message-avatar">
+                    <div class="avatar-gif-small"></div>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">
+                        <p>Привет! 👋 Я ваш AI помощник Modnoe Mesto на базе Искуственного интелекта.</p>
+                        <p>Могу помочь с:</p>
+                        <ul class="mt-2 space-y-1 text-sm">
+                            <li>• Размерами и коллекциями</li>
+                            <li>• Заказом и доставкой</li>
+                            <li>• Возвратом и ценами</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Быстрые вопросы -->
+            <div class="quick-questions">
+                <button class="quick-question" data-question="Какие у вас есть размеры?">
+                    📏 РАЗМЕРЫ
+                </button>
+                <button class="quick-question" data-question="Как сделать заказ?">
+                    🛒 ЗАКАЗ
+                </button>
+                <button class="quick-question" data-question="Есть ли доставка в мой город?">
+                    🚚 ДОСТАВКА
+                </button>
+                <button class="quick-question" data-question="Как вернуть товар?">
+                    🔄 ВОЗВРАТ
+                </button>
+            </div>
+        </div>
+
+        <!-- Контейнер для кнопок под сообщением -->
+        <div id="chat-buttons" class="chat-buttons"></div>
+
+        <!-- Поле ввода -->
+        <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+                <input
+                    type="text"
+                    id="chat-input"
+                    placeholder="Напишите ваш вопрос..."
+                    class="chat-input"
+                    autocomplete="off"
+                >
+            </div>
+            <button id="chat-fab" class="chat-fab mb-4 mr-20">💬</button>
+            <div class="text-xs text-gray-500 mb-2 text-right">
+                Для сложных вопросов используйте контакты в меню
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- CSS для кнопок -->

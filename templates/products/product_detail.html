@@ -1,0 +1,211 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="product-detail-container">
+
+    <div class="product-main">
+
+        <!-- GALLERY -->
+        <div class="product-gallery">
+
+            <div class="image-wrapper">
+                <button class="nav prev">‹</button>
+
+                {% if main_image %}
+                <img id="mainImage"
+                     src="{{ main_image.image.url }}"
+                     alt="{{ product.name }}">
+                {% endif %}
+
+                <button class="nav next">›</button>
+            </div>
+
+            <div class="thumbnails">
+                {% for img in product.images.all %}
+                <img src="{{ img.image.url }}"
+                     data-full="{{ img.image.url }}"
+                     class="thumb {% if img.is_main %}active{% endif %}">
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- INFO -->
+        <div class="product-info">
+            <h1>{{ product.name }}</h1>
+            <div class="price">
+                {% if product.price %}
+                {{ product.price }} тг.
+                {% else %}
+                Скоро поступление
+                {% endif %}
+            </div>
+
+            <form id="addToCartForm"
+                  action="{% url 'add_to_cart' product.id %}"
+                  method="post">
+                {% csrf_token %}
+
+                <!-- Выбор размера (если есть размеры) -->
+                <style>
+    /* Контейнер для выбора размеров */
+    .size-selection {
+        margin-bottom: 25px;
+        font-family: sans-serif;
+    }
+
+    .size-selection label.title {
+        display: block;
+        margin-bottom: 12px;
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .size-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* Скрываем стандартный кружок радио-кнопки */
+    .size-option input[type="radio"] {
+        display: none;
+    }
+
+    /* Стиль самой "плитки" размера */
+    .size-option label.box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 16px;
+        min-width: 60px;
+        border: 1.5px solid #e0e0e0;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #fff;
+        transition: all 0.2s ease;
+    }
+
+    /* Текст размера */
+    .size-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: #000;
+    }
+
+    /* Подпись о наличии (мелкий текст) */
+    .quantity-info {
+        font-size: 10px;
+        color: #888;
+        margin-top: 2px;
+    }
+
+    /* Состояние при наведении */
+    .size-option label.box:hover:not(.unavailable) {
+        border-color: #000;
+        background: #f9f9f9;
+    }
+
+    /* Состояние ВЫБРАНО */
+    .size-option input[type="radio"]:checked + label.box {
+        background: #000;
+        border-color: #000;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .size-option input[type="radio"]:checked + label.box .size-name,
+    .size-option input[type="radio"]:checked + label.box .quantity-info {
+        color: #fff;
+    }
+
+    /* Состояние НЕДОСТУПНО */
+    .size-option label.box.unavailable {
+        background: #f5f5f5;
+        border-color: #eee;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .size-option label.box.unavailable .size-name {
+        text-decoration: line-through;
+        color: #aaa;
+    }
+</style>
+
+{% if product.available_sizes.exists %}
+<div class="size-selection">
+    <label class="title">Размер:</label>
+    <div class="size-options">
+        {% for size in product.available_sizes.all %}
+        <div class="size-option">
+            <input type="radio"
+                   id="size-{{ size.id }}"
+                   name="size"
+                   value="{{ size.id }}"
+                   {% if not size.is_available %}disabled{% endif %}
+                   required>
+
+            <label for="size-{{ size.id }}" class="box {% if not size.is_available %}unavailable{% endif %}">
+                <span class="size-name">{{ size.size }}</span>
+                <span class="quantity-info">({{ size.availability_status }})</span>
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+                <input type="hidden" name="quantity" value="1">
+
+                <button type="submit" id="addToCartBtn">
+                    ADD TO CART
+                </button>
+
+            </form>
+
+            <div id="cartMessage"></div>
+
+            {% if product.description %}
+            <div class="product-description">
+                {{ product.description|linebreaks }}
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+    {% if similar_products %}
+    <div class="similar">
+        <h2>Вам также может понравиться</h2>
+        <div class="similar-grid">
+            {% for p in similar_products %}
+            <a href="{% url 'product_detail' p.id %}">
+                {% if p.images.first %}
+                <img src="{{ p.images.first.image.url }}">
+                {% endif %}
+                <div class="name">{{ p.name }}</div>
+                <div class="price">{% if p.price %}
+                {{ p.price }} тг.
+                {% else %}
+                Скоро поступление
+                {% endif %}</div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/product_detail.js' %}"></script>
+{% endblock %}

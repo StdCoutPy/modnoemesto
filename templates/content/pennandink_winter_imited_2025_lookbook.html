@@ -1,0 +1,91 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+
+{% with images=lookbook.images.all %}
+{% if images|length >= 1 %}
+
+<!-- 1. FULL WIDTH -->
+<div class="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-16">
+  <img src="{{ images.0.image.url }}" class="w-full h-auto object-cover" alt="">
+</div>
+
+<div class="max-w-3xl mx-auto px-4 text-center mb-28">
+  <h1><b>Urban Layers</b></h1><br>
+  <p class="text-gray-600 mb-6">
+     лимитированная коллекция, вдохновленная ритмом города и силой женщин, которые в нем живут.
+Коллекция сочетает в себе объемные вязаные вещи, смелую верхнюю одежду и непринужденные аксессуары, создавая образ, одновременно сильный и женственный.
+Слои за слоем эти вещи дарят тепло, комфорт и уверенность, созданы для улиц и стилизованы под женщин.
+  </p>
+
+  <a href="/products/collection"
+     class="inline-block border border-black px-8 py-3 text-sm uppercase tracking-widest hover:bg-black hover:text-white transition">
+   Купить коллекцию
+  </a>
+</div>
+
+<!-- 2 + 3 -->
+{% if images|length >= 3 %}
+<div class="max-w-6xl mx-auto px-4 mb-16">
+  <div class="grid grid-cols-2 gap-6">
+    <img src="{{ images.1.image.url }}" class="w-full aspect-[3/4] object-cover" alt="">
+    <img src="{{ images.2.image.url }}" class="w-full aspect-[3/4] object-cover" alt="">
+  </div>
+</div>
+
+<div class="max-w-3xl mx-auto px-4 text-center mb-28">
+  <p class="text-gray-600">
+    Создан для того, чтобы двигаться вместе с вами — от городских утренних часов до тихих вечеров.
+  </p>
+</div>
+{% endif %}
+
+<!-- 4. FULL WIDTH -->
+{% if images|length >= 4 %}
+<div class="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-16">
+  <img src="{{ images.3.image.url }}" class="w-full h-auto object-cover" alt="">
+</div>
+
+<div class="max-w-3xl mx-auto px-4 text-center mb-28">
+  <p class="text-gray-600 mb-6">
+    Изысканные базовые вещи, созданные для современного зимнего гардероба.
+  </p>
+
+  <a href="/products/collection"
+     class="inline-block border border-black px-8 py-3 text-sm uppercase tracking-widest hover:bg-black hover:text-white transition">
+    Откройте для себя стили
+  </a>
+</div>
+{% endif %}
+
+<!-- GALLERY -->
+{% if images|length > 4 %}
+<div class="max-w-6xl mx-auto px-4 pb-24 text-center">
+
+  <p class="uppercase tracking-widest text-xs text-gray-500 mb-6">
+   Зимние моменты
+  </p>
+
+  <p class="text-gray-600 mb-10">
+   Более подробный обзор ключевых моделей из лимитированной зимней коллекции.
+  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+    {% for image in images|slice:"4:" %}
+      <img src="{{ image.image.url }}" class="w-full h-auto object-cover" alt="">
+    {% endfor %}
+  </div>
+
+  <a href="/products/collection/"
+     class="inline-block border border-black px-10 py-4 text-sm uppercase tracking-widest hover:bg-black hover:text-white transition">
+    Посмотреть полную коллекцию
+  </a>
+
+</div>
+{% endif %}
+
+{% endif %}
+{% endwith %}
+
+{% endblock %}

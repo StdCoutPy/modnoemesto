@@ -1,0 +1,65 @@
+
+{% extends 'main/base.html' %}
+
+{% load static %}
+    {% block extra_css %}
+
+<style>.lookbook-index {
+  margin: 120px 15vw;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.lookbook-link {
+  font-size: 28px;
+  text-decoration: none;
+  color: #000;
+}
+
+.lookbook-link:hover {
+  text-decoration: underline;
+}
+.lookbook-grid {
+  margin: 0 8vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.lookbook-grid img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+  .lookbook-grid {
+  margin: 0 8vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.lookbook-grid img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .lookbook-grid {
+    margin: 0 4vw;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="lookbook-grid">
+  {% for image in lookbook.images.all %}
+    <img src="{{ image.image.url }}">
+  {% endfor %}
+</div>
+{% endblock %}

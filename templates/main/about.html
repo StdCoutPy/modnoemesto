@@ -1,0 +1,430 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}О Нас - Modnoe Mesto{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-white">
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center bg-black text-white overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-black to-gray-900"></div>
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-6xl md:text-8xl font-light mb-6 tracking-wider">MODNOE MESTO</h1>
+            <div class="w-32 h-0.5 bg-white mx-auto mb-8"></div>
+            <p class="text-xl md:text-2xl font-light tracking-widest uppercase">
+                Элегантность вне времени
+            </p>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-white mt-2 rounded-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-light mb-8 tracking-wide">ФИЛОСОФИЯ БРЕНДА</h2>
+            <p class="text-lg text-gray-600 leading-relaxed mb-12">
+                Modnoe Mesto — это не просто одежда. Это искусство самовыражения,
+                где каждая деталь продумана до мелочей. Мы верим, что настоящая элегантность
+                рождается на стыке традиционного мастерства и современных тенденций.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                <div class="text-center">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="font-semibold mb-4">МИССИЯ</h3>
+                    <p class="text-gray-600 text-sm">Продвижение в Казахстан Французкой и Итальянской моды, качественных
+                        и брендовых вещей. </p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-4">⭐</div>
+                    <h3 class="font-semibold mb-4">КАЧЕСТВО</h3>
+                    <p class="text-gray-600 text-sm">Только премиальные материалы и ручная работа</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-4">💎</div>
+                    <h3 class="font-semibold mb-4">СТИЛЬ</h3>
+                    <p class="text-gray-600 text-sm">Роскошные вещи передовых дизайнеров Европы</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-light text-center mb-16 tracking-wide">НАША ИСТОРИЯ</h2>
+
+            <!-- Timeline -->
+            <div class="relative">
+                <!-- Vertical Line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gray-300"></div>
+
+                <!-- 2015 -->
+                <div class="flex flex-col md:flex-row items-center mb-16">
+                    <div class="md:w-1/2 md:pr-12 text-right mb-8 md:mb-0">
+                        <h3 class="text-2xl font-light mb-4 flex items-center justify-center mt-4">2015</h3>
+                        <p style="text-align: center;" class="text-gray-600">Рождение идеи и первое открытие</p>
+                    </div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-black rounded-full z-10"></div>
+                    <div class="md:w-1/2 md:pl-12">
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="grid grid-cols-1 gap-4">
+                                <img class="bg-gray-200  flex items-center justify-center rounded-lg"
+                                     src="{% static 'images/mm_2015.webp' %}">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2024 -->
+                <div class="flex flex-col md:flex-row items-center mb-16">
+                    <div class="md:w-1/2 md:pr-12 order-2 md:order-1">
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+    <div class="flex flex-col items-center gap-8">
+
+        <!-- Большое фото сверху -->
+        <div class="">
+            <img class="w-full rounded-xl w-full h-64 object-cover block shadow-sm"
+                 src="{% static 'images/mm_astana.jpeg' %}" alt="Astana">
+        </div>
+
+        <!-- Очень большие круги снизу -->
+        <div class="flex flex-row gap-8 justify-center w-full">
+            <img style="border-radius: 50%; object-fit: cover;"
+                 class="bg-gray-200 h-48 w-48 shadow-md"
+                 src="{% static 'images/mm_24_2.jpg' %}">
+
+            <img style="border-radius: 50%; object-fit: cover;"
+                 class="bg-gray-200 h-48 w-48 shadow-md"
+                 src="{% static 'images/mm_24_3.png' %}">
+        </div>
+
+    </div>
+</div>
+
+
+                    </div>
+
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-black rounded-full z-10"></div>
+                    <div class="md:w-1/2 md:pl-12 text-left mb-8 md:mb-0 order-1 md:order-2">
+                        <h3 class="text-2xl font-light mb-4 flex items-center justify-center mt-4">2024</h3>
+                        <p style="text-align: center;" class="text-gray-600">Рассширение в Астане</p>
+                    </div>
+                </div>
+
+                <!-- 2025 -->
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 md:pr-12 text-right mb-8 md:mb-0">
+                        <h3 class="text-2xl font-light mb-4 flex items-center justify-center mt-4">2025</h3>
+                        <p style="text-align: center;" class="text-gray-600">Открытие флагманского магазина<br> женской
+                            одежды <br> Modnoe Mesto</p>
+                    </div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-black rounded-full z-10"></div>
+                    <div class="md:w-1/2 md:pl-12">
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="grid grid-cols-2 gap-4">
+                                <!-- Добавлены классы w-full и object-cover -->
+                                <img class="bg-gray-200 h-48 w-full rounded-lg object-cover"
+                                     src="{% static 'images/mm_2025.png' %}">
+                                <img class="bg-gray-200 h-48 w-full rounded-lg object-cover"
+                                     src="{% static 'images/mm_25_3.png' %}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flagship Store Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-light text-center mb-16 tracking-wide">ФЛАГМАНСКИЙ БУТИК</h2>
+
+            <div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                <div class="h-96 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <div class="text-center text-gray-500">
+                        <div class="text-4xl mb-4">🏢</div>
+                        <p class="text-xl">Флагманский бутик Modnoe Mesto</p>
+                        <p class="text-sm mt-2">г. Кокшетау, Жилой комплекс "Saltanat"</p>
+                    </div>
+                </div>
+
+                <div class="p-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-light mb-4">Кокшетау</h3>
+                            <p class="text-gray-600 mb-4">
+                                Наш флагманский бутик расположен в самом сердце города Кокшетау.
+                                Пространство, где каждая деталь отражает философию бренда —
+                                минимализм, элегантность и внимание к деталям.
+                            </p>
+                            <div class="space-y-2">
+                                <p class="text-sm text-gray-500">📍 Жилой комплекс "Saltanat"</p>
+                                <p class="text-sm text-gray-500">🕒 Ежедневно 10:00 - 19:00</p>
+                                <p class="text-sm text-gray-500">📞 +7 (701) 910-17-19</p>
+                                <p class="text-sm text-gray-500" >Построить маршрут -> <a href="https://go.2gis.com/hQJSH" class=" text-black-500">ЖМИ!</a></p>
+                            </div>
+                        </div>
+                        <div class="rounded-lg overflow-hidden">
+                            <iframe
+                                    class="w-full h-64"
+                                    frameborder="0"
+                                    src="https://makemap.2gis.ru/widget?data=eJw9kM1ugzAQhN9le6yFArYBI-VQRf3JqaiqFKlVDgRvEysGI-O0TVDevRtIc_TszCfPDOC8Ro_6GV2DwRvsofgcIBw7hAKesAoHj8Cg865DH8b7ABr72psuGNeSq3x5uH9fqf2mUXb5GNuav32XC_VTbudzivbBuz0unHWezHdCb7JE3vSV0WEHRfL_fu2q2oQjFDGDL2PtLZdKnXIFk3pzzSLJwFfaHOhjaZQqxRXPBI-5jBWD07LV-EuwM4PtVPF4KXDtVzrTBkLWjmYwbRXG-qmKuBIiyZnkUZLnKhdryhtNHCn5ec2gqbrS9WYaYABbBSgmc5ZyEc_yTHIqYC_nESdTMRMqEVwRFk7ONQTLiUpDOmtXO0T7MarBH_D8B6uhfkM"
+                                    sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"
+                                    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-top-navigation-by-user-activation"
+                            ></iframe>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Section -->
+    <section class="py-20 bg-gray-900 text-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-light text-center mb-4 tracking-wide">СОТРУДНИЧЕСТВО</h2>
+            <p class="text-center text-gray-300 mb-16">С гордостью представляем наших партнеров</p>
+
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-light mb-4">ЗОЛОТАЯ ЛИЛИЯ</h3>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Эксклюзивный партнер в Казахстане. Сеть премиальных бутиков,
+                    разделяющая наши ценности качества и элегантности.
+                </p>
+
+            </div>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Astana -->
+                <div class="bg-gray-800 rounded-2xl p-6">
+                    <h4 class="text-xl font-light mb-4 text-center">Кокшетау</h4>
+                    <div class="bg-gray-700 h-48 rounded-lg mb-4 flex items-center justify-center">
+                        <iframe id="map_444478013" frameborder="0" class="rounded-lg overflow-hidden w-full h-full"
+                                src="https://makemap.2gis.ru/widget?data=eJw1jkFPhDAQhf_LeCWbtrRLIfGE0ZCwhngxq9kDgRFrCkNKN-5K-O8WVuc27817881ArkWH7RNSj94ZnCB7n8FfR4QMHrH2Z4cQwehoROc3f4aGLLng330IbJgIvjferglJeXn4OsTFc35hx-ql87lkJSXFQ9GxY7zu36w83odIi1PjzOgNDSEYhJ9iaPECGWf_s0TQ3cCu69s_qorM4MN9QwHeDLXfoPfpLtZMiiRS8U6kPNGnEDctZCKRfDlF0NdjRZO5PZzB1h6y9VanQouU8VQpziOwq7217bXSqWRcSBUHPKI-wKnQGsDJ2tdPRPu2qd6dcfkFiZJl0g"
+                                sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
+                    </div>
+
+                    <div class="text-center">
+                        <p class="text-gray-300">г. Кокшетау, ТРЦ РИО Центральный рынок Улица Полины Осипенко, 1</p>
+                        <p class="text-sm text-gray-400 mt-2">Ежедневно 10:00 - 19:00</p>
+                    </div>
+                </div>
+
+                <!-- Kokshetau -->
+                <div class="bg-gray-800 rounded-2xl p-6">
+                    <h4 class="text-xl font-light mb-4 text-center">Кокшетау</h4>
+                    <div class="bg-gray-700 h-48 rounded-lg mb-4 flex items-center justify-center">
+                        <iframe id="map_419575964" frameborder="0" class="rounded-lg overflow-hidden w-full h-full"
+                                src="https://makemap.2gis.ru/widget?data=eJw1jsFqg0AQht9lepWwuuqqkFNCQyGFtD0UWnIQd5puWR1ZJ9BUfPeO2u5pme-ff74RKFgMaA9ILXJwOED1PgLfeoQK7rHma0CIoA_UY-CFj9CQpyD87iPBRiXC2bGfN1LaHR9f9s9f9rBTx_0TX7ZbwRaHJrieHXUSksHPQ2fxG6pY_b8pgssqcZtP_BmcyHUs-YZE1HU1L4J5udGFKXQcZXqjlfzPsu6s9JWlmc4RtHV_osGtB0fwNUO1ZvNElYnRWa5NBH7Ga5sq09KkWWyKVPSIWinLpVXEyfvXT0T_tkw5XHH6BZpMX70"
+                                sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-gray-300">г. Кокшетау, ТРЦ Kokshetau Mall Центральный микрорайон, 24г</p>
+                        <p class="text-sm text-gray-400 mt-2">Ежедневно 10:00 - 19:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners / Brands Section -->
+    <section class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-light tracking-wide mb-4">
+                    НАШИ ПАРТНЁРЫ
+                </h2>
+                <p class="text-gray-500 uppercase tracking-widest text-sm">
+                    Бренды, с которыми мы работаем
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center">
+
+                <!-- Brand 1 -->
+                <a class="group" href="https://shop.annettegoertz.com/">
+                    <div class="h-32 overflow-hidden flex items-center justify-center border border-gray-200 rounded-xl
+                            transition-all duration-500
+                            group-hover:border-black group-hover:shadow-lg">
+                    <span class="text-gray-400 text-xl tracking-widest
+                                 group-hover:text-black transition">
+                        <img src="{% static 'images/aneta_gortz.jpg' %}"
+                             class="h-full opacity-60 group-hover:opacity-100 transition">
+                    </span>
+                    </div>
+                </a>
+
+                <!-- Brand 2 -->
+                <a class="group" href="https://grizas.com/">
+                    <div class="h-32 overflow-hidden flex items-center justify-center border border-gray-200 rounded-xl
+                            transition-all duration-500
+                            group-hover:border-black group-hover:shadow-lg">
+                    <span class="text-gray-400 text-xl tracking-widest
+                                 group-hover:text-black transition">
+                        <img src="{% static 'images/grizas_logo.png' %}"
+                             class="h-full opacity-60 group-hover:opacity-100 transition">
+                    </span>
+                    </div>
+                </a>
+
+                <!-- Brand 3 -->
+                <a class="group" href="https://pennandink-ny.com/">
+                    <div class="h-32 overflow-hidden flex items-center justify-center border border-gray-200 rounded-xl
+                            transition-all duration-500
+                            group-hover:border-black group-hover:shadow-lg">
+                    <span class="text-gray-400 text-xl tracking-widest
+                                 group-hover:text-black transition">
+                        <img src="{% static 'images/pennandink_logo.png' %}"
+                             class="h-full opacity-60 group-hover:opacity-100 transition">
+                    </span>
+                    </div>
+                </a>
+
+                <!-- Brand 4 -->
+                <a class="group" href="https://xd-store.com/en/">
+                    <div class="h-32 overflow-hidden flex items-center justify-center border border-gray-200 rounded-xl
+                            transition-all duration-500
+                            group-hover:border-black group-hover:shadow-lg">
+                        <span class="text-gray-400 text-xl tracking-widest
+                                     group-hover:text-black transition">
+                        <img src="{% static 'images/xeniadesign_logo.webp' %}"
+                             class="h-full opacity-60 group-hover:opacity-100 transition">
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Brand 5 -->
+                <a class="group" href="http://www.creaconcept.com/">
+                    <div class="h-32 overflow-hidden flex items-center justify-center border border-gray-200 rounded-xl
+                            transition-all duration-500
+                            group-hover:border-black group-hover:shadow-lg">
+
+<span class="text-gray-400 text-xl tracking-widest
+                                 group-hover:text-black transition">
+                        <img src="{% static 'images/crea_logo.png' %}"
+                             class="h-full opacity-60 group-hover:opacity-100 transition">
+                    </span>
+                    </div>
+                </a>
+
+            </div>
+
+            <p class="text-center text-gray-500 mt-16 max-w-2xl mx-auto">
+                Мы сотрудничаем с европейскими брендами, разделяющими наши ценности:
+                безупречное качество, стиль и внимание к деталям.
+            </p>
+
+        </div>
+
+    </section>
+<div class="mb-4 flex justify-center gap-4">
+            <!-- WhatsApp -->
+            <a class="group" href="https://wa.me/77019101719">
+
+                <!-- Уменьшили размер до h-10 w-10 и сделали rounded-full -->
+                    <img class="mr-10 opacity-80 h-14 w-14 overflow-hidden flex items-center justify-center border border-white-600 rounded-full
+                            transition-all duration-500
+                            group-hover:border-white group-hover:shadow-lg" src="{% static 'images/whatsapp_icon.png' %}"
+                         >
+
+
+            </a>
+
+            <!-- Instagram -->
+            <a class="group" href="https://www.instagram.com/modnoe_mesto_kz?igsh=ZzdvMmJsMWl3Mmkx">
+
+                <!-- Одинаковый размер для симметрии -->
+                    <img src="{% static 'images/instagram_logo.avif' %}"
+                         class="scale-125 opacity-80 h-14 w-14 overflow-hidden flex items-center justify-center border border-white-600 rounded-full
+                            transition-all
+                            group-hover:border-white group-hover:shadow-lg">
+
+            </a>
+        </div>
+
+    <!-- Contact Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-light mb-8 tracking-wide">СВЯЖИТЕСЬ С НАМИ</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="text-2xl mb-4">📧</div>
+                    <h3 class="font-light mb-2">EMAIL</h3>
+                    <p class="text-gray-600">9101719@mail.ru</p>
+                </div>
+                <div>
+                    <div class="text-2xl mb-4">📞</div>
+                    <h3 class="font-light mb-2">ТЕЛЕФОН</h3>
+                    <p class="text-gray-600">+7 (701) 910-17-19</p>
+                </div>
+                <div>
+                    <div class="text-2xl mb-4">📍</div>
+                    <h3 class="font-light mb-2">АДРЕС</h3>
+                    <p class="text-gray-600">г. Кокшетау, Жилой комплекс "Saltanat", д. 5</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<style>
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Timeline animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .timeline-item {
+        animation: fadeInUp 0.8s ease-out;
+    }
+</style>
+
+<script>
+    // Simple scroll animations
+    document.addEventListener('DOMContentLoaded', function() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe timeline items
+        document.querySelectorAll('.flex.flex-col.md\\:flex-row.items-center').forEach(item => {
+            observer.observe(item);
+        });
+    });
+</script>
+{% endblock %}

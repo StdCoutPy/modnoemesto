@@ -1,0 +1,49 @@
+
+/* static/css/dropdown.css */
+
+/* Стили для подменю категорий */
+.category-with-submenu {
+    position: relative;
+}
+
+.submenu-container {
+    position: absolute;
+    left: 5%;
+    top: 20px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 60;
+}
+
+.category-with-submenu:hover .submenu-container {
+    opacity: 1;
+    visibility: visible;
+}
+
+.submenu-item {
+    display: block;
+    padding: 0.5rem 0;
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.submenu-item:hover {
+    color: #000;
+    border-bottom-color: #000;
+}
+
+/* Стиль для стрелочки в меню коллекций */
+.group:hover .group-hover\:visible {
+    visibility: visible;
+}
+
+.group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+}
