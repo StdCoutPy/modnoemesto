@@ -22,9 +22,9 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =  env('DEBUG')
 
-CSRF_TRUSTED_ORIGINS = env.list('TRUSTED_ORIGINS', default=['http://127.0.0.1:8000'])
+CSRF_TRUSTED_ORIGINS = env.list('TRUSTED_ORIGINS')
 #ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost'])
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 # `Ap`plication definition
 
 INSTALLED_APPS = [
@@ -137,6 +137,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+STATIC_ROOT = BASE_DIR / "static_root"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -198,3 +199,7 @@ PG_KEY = env('PAYBOX_KEY')
 
 #OPEN AI API
 AI_API_KEY=env('AI_API_KEY')
+
+
+#Доверие прокси (для CSRF): Чтобы Django понимал, что он за Nginx.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

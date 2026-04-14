@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    # ВНИМАНИЕ: Проверь, что папка называется DjangoProject (как в твоем ls)
+    command: gunicorn DjangoProject.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - static_volume:/app/static_root
+      - /var/www/modnoemesto/media:/app/media
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:8000:8000"
+volumes:
+  static_volume:
+  media_volume:
