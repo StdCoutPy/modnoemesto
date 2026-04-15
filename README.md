@@ -7,7 +7,7 @@
 **Modnoe Mesto** — это полнофункциональная экосистема для e-commerce, разработанная с нуля. Проект демонстрирует архитектурный подход Senior-уровня: от кастомного дизайна до сложной инфраструктуры с интеграцией нейросетей, автоматизированным парсингом и высокой степенью защиты.
 
 ## 🚀 Live Demo & Production
-*   <h1>Domain: [https://modnoemesto.asia](https://modnoemesto.asia)</h1>
+*   <h1>Domain: <a href="https://modnoemesto.asia">modnoemesto.asia</a></h1>
 *   **Infrastructure:** Собственный VPS (Ubuntu 24.04), Docker, Nginx, SSL (Let's Encrypt).
 *   **PWA Ready:** Сайт полностью оптимизирован для работы в Safari/Chrome как нативное приложение с кастомными иконками и манифестом.
 
