@@ -1,14 +1,13 @@
 # 👗 Modnoe Mesto — Senior-Grade AI E-commerce Ecosystem
+```diff
++ Python   Django   Docker   Security
+```
 
-![Python](https://shields.io)
-![Django](https://shields.io)
-![Docker](https://shields.io)
-![Security](https://shields.io)
 
 **Modnoe Mesto** — это полнофункциональная экосистема для e-commerce, разработанная с нуля. Проект демонстрирует архитектурный подход Senior-уровня: от кастомного дизайна до сложной инфраструктуры с интеграцией нейросетей, автоматизированным парсингом и высокой степенью защиты.
 
 ## 🚀 Live Demo & Production
-*   **Domain:** [https://modnoemesto.asia](https://modnoemesto.asia)
+*   <h1>Domain: [https://modnoemesto.asia](https://modnoemesto.asia)</h1>
 *   **Infrastructure:** Собственный VPS (Ubuntu 24.04), Docker, Nginx, SSL (Let's Encrypt).
 *   **PWA Ready:** Сайт полностью оптимизирован для работы в Safari/Chrome как нативное приложение с кастомными иконками и манифестом.
 
