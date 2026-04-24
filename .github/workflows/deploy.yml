@@ -1,0 +1,24 @@
+name: Deploy modnoemesto.asia
+
+on:
+  push:
+    branches: [ main ] # Если у тебя ветка называется master, замени main на master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Execute remote ssh commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/ubuntu/modnoemesto
+            git pull origin main
+            docker-compose up -d --build
+            docker image prune -f
