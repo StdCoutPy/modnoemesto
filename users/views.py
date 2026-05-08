@@ -151,26 +151,26 @@ def register_view(request):
             """
 
             # Создаем и отправляем письмо
+            # ... твой код создания письма ...
             try:
-                msg = EmailMultiAlternatives(
-                    subject=subject,
-                    body=text_content,
-                    from_email=settings.DEFAULT_FROM_EMAIL,  # Используем настройки из settings.py
-                    to=[email],
-                    headers={'X-Priority': '1', 'Importance': 'high'}  # Помечаем как важное
-                )
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
+                # Если это AJAX запрос (через JS)
+                if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                    return JsonResponse(
+                        {"status": "success", "message": "На ваш email отправлено письмо с подтверждением!"})
 
                 messages.success(request, 'На ваш email отправлено письмо с подтверждением')
                 return redirect('register')
 
             except Exception as e:
-                # Если произошла ошибка при отправке, показываем ссылку для теста
-                print(f"Ошибка отправки email: {e}")
-                messages.warning(request,
-                                 f'Письмо не отправлено. Для теста используйте ссылку: {verification_url}')
+                error_msg = f"Ошибка при отправке: {str(e)}"
+                if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                    return JsonResponse({"status": "error", "message": error_msg}, status=500)
+
+                messages.error(request, error_msg)
                 return redirect('register')
+
 
     else:
         form = RegistrationForm()
