@@ -178,27 +178,18 @@
 
 
 @media (max-width: 1024px) {
-    /* Убиваем любые движения и заставляем картинку прилипнуть */
     .parallax-item {
-        transform: none !important;
-        -webkit-transform: none !important;
+        /* Принудительно отключаем любые движения */
         position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
+        transform: translate3d(0, 0, 0) !important;
+        -webkit-transform: translate3d(0, 0, 0) !important;
+
+        /* Запрещаем масштабирование */
+        background-size: cover;
         height: 100% !important;
         width: 100% !important;
-        object-fit: cover !important;
-        transition: none !important;
-        will-change: auto !important;
-    }
 
-    /* Убираем эффект перспективы, который может давать рывки */
-    .parallax-container {
-        perspective: none !important;
-        -webkit-perspective: none !important;
-        overflow: hidden !important;
-        /* Фиксируем высоту, чтобы адресная строка не влияла */
-        height: 100dvh !important;
+        /* Убираем инерцию трансформации */
+        transition: none !important;
     }
 }
-

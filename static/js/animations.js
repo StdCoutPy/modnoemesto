@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Инициализация скролла только если есть элементы для анимации
     if (parallaxItems.length > 0 || animatedElements.length > 0) {
         window.addEventListener('scroll', () => {
+            // Если мобилка — ВООБЩЕ не заходим в функции анимаций
+            if (window.innerWidth < 1024) return;
+
             if (parallaxItems.length > 0) {
                 handleParallax();
             }
