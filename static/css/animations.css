@@ -177,22 +177,28 @@
 }
 
 
-/* В конец твоего CSS файла */
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
+    /* Убиваем любые движения и заставляем картинку прилипнуть */
     .parallax-item {
         transform: none !important;
         -webkit-transform: none !important;
-        transition: none !important; /* Убираем конфликт с инерцией */
-        will-change: auto !important;
-        height: 100% !important;
+        position: absolute !important;
         top: 0 !important;
-        object-fit: cover;
+        left: 0 !important;
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover !important;
+        transition: none !important;
+        will-change: auto !important;
     }
 
+    /* Убираем эффект перспективы, который может давать рывки */
     .parallax-container {
-        height: 100vh;
-        height: 100dvh; /* Для стабильной высоты в Safari */
+        perspective: none !important;
+        -webkit-perspective: none !important;
+        overflow: hidden !important;
+        /* Фиксируем высоту, чтобы адресная строка не влияла */
+        height: 100dvh !important;
     }
 }
-
 
