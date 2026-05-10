@@ -5,11 +5,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Параллакс эффект
     const parallaxItems = document.querySelectorAll('.parallax-item');
-    function handleParallax() {
+        function handleParallax() {
+        // Отключаем параллакс на мобильных устройствах (ширина меньше 768px)
+        // Это стандарт индустрии, так как мобильные процессоры плохо тянут
+        // тяжелые трансформации при скролле
+        if (window.innerWidth < 768) {
+            parallaxItems.forEach(item => {
+                item.style.transform = 'none'; // Сбрасываем трансформацию
+            });
+            return;
+        }
+
         parallaxItems.forEach(item => {
             const rate = parseFloat(item.getAttribute('data-parallax-rate')) || 0.5;
             const scrollY = window.scrollY;
-            item.style.transform = `translateY(${scrollY * rate}px)`;
+
+            // Используем requestAnimationFrame для более плавной отрисовки
+            window.requestAnimationFrame(() => {
+                item.style.transform = `translate3d(0, ${scrollY * rate}px, 0)`;
+            });
         });
     }
 
