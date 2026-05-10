@@ -6,10 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Параллакс эффект
     const parallaxItems = document.querySelectorAll('.parallax-item');
     function handleParallax() {
-    // Если ширина меньше 1024px, выходим и ничего не двигаем
+    // Если ширина меньше 1024px (планшеты и мобилки), выходим и сбрасываем трансформацию
     if (window.innerWidth < 1024) {
         parallaxItems.forEach(item => {
             item.style.transform = 'none';
+            item.style.webkitTransform = 'none';
         });
         return;
     }

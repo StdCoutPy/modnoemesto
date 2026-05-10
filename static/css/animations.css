@@ -122,22 +122,7 @@
     position: relative;
 }
 
-@media (max-width: 1023px) {
-    .parallax-item {
-        transform: none !important;
-        transition: none !important;
-        /* Фиксируем картинку, чтобы она просто была фоном */
-        object-fit: cover;
-        height: 100% !important;
-        top: 0 !important;
-    }
 
-    .parallax-container {
-        /* Убираем динамическую высоту, ставим стабильную */
-        height: 100vh;
-        height: 100dvh;
-    }
-}
 
 .parallax-item {
     /* УДАЛИ ЭТУ СТРОКУ: transition: transform 0.1s ease-out; */
@@ -189,6 +174,25 @@
 .text-inner {
     text-align: center;
     width: auto;
+}
+
+
+/* В конец твоего CSS файла */
+@media (max-width: 1023px) {
+    .parallax-item {
+        transform: none !important;
+        -webkit-transform: none !important;
+        transition: none !important; /* Убираем конфликт с инерцией */
+        will-change: auto !important;
+        height: 100% !important;
+        top: 0 !important;
+        object-fit: cover;
+    }
+
+    .parallax-container {
+        height: 100vh;
+        height: 100dvh; /* Для стабильной высоты в Safari */
+    }
 }
 
 
