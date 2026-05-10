@@ -123,8 +123,10 @@
 }
 
 .parallax-item {
-    will-change: transform;
-    transition: transform 0.1s ease-out;
+    /* УДАЛИ ЭТУ СТРОКУ: transition: transform 0.1s ease-out; */
+    /* Добавь это для стабильности на iOS: */
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
 
 .image-hover-gradient {

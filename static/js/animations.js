@@ -6,26 +6,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Параллакс эффект
     const parallaxItems = document.querySelectorAll('.parallax-item');
         function handleParallax() {
-        // Отключаем параллакс на мобильных устройствах (ширина меньше 768px)
-        // Это стандарт индустрии, так как мобильные процессоры плохо тянут
-        // тяжелые трансформации при скролле
-        if (window.innerWidth < 768) {
-            parallaxItems.forEach(item => {
-                item.style.transform = 'none'; // Сбрасываем трансформацию
-            });
-            return;
-        }
-
+    // Жестко отключаем на мобилках
+    if (window.matchMedia("(max-width: 768px)").matches) {
         parallaxItems.forEach(item => {
-            const rate = parseFloat(item.getAttribute('data-parallax-rate')) || 0.5;
-            const scrollY = window.scrollY;
-
-            // Используем requestAnimationFrame для более плавной отрисовки
-            window.requestAnimationFrame(() => {
-                item.style.transform = `translate3d(0, ${scrollY * rate}px, 0)`;
-            });
+            // Убираем инлайновые стили трансформации, чтобы картинка стояла мертво
+            item.style.transform = 'none';
+            item.style.webkitTransform = 'none';
         });
+        return;
     }
+
+    parallaxItems.forEach(item => {
+        const rate = parseFloat(item.getAttribute('data-parallax-rate')) || 0.5;
+        const scrollY = window.pageYOffset || window.scrollY;
+
+        window.requestAnimationFrame(() => {
+            // translate3d включает аппаратное ускорение
+            item.style.transform = `translate3d(0, ${scrollY * rate}px, 0)`;
+            item.style.webkitTransform = `translate3d(0, ${scrollY * rate}px, 0)`;
+        });
+    });
+}
 
     // Анимация при скролле
     const animatedElements = document.querySelectorAll('.animate-fadeInUp, .animate-scaleIn, .animate-textReveal');
