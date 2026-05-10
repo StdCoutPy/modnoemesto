@@ -5,25 +5,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Параллакс эффект
     const parallaxItems = document.querySelectorAll('.parallax-item');
-        function handleParallax() {
-    // Жестко отключаем на мобилках
-    if (window.matchMedia("(max-width: 768px)").matches) {
+    function handleParallax() {
+    // Если ширина меньше 1024px, выходим и ничего не двигаем
+    if (window.innerWidth < 1024) {
         parallaxItems.forEach(item => {
-            // Убираем инлайновые стили трансформации, чтобы картинка стояла мертво
             item.style.transform = 'none';
-            item.style.webkitTransform = 'none';
         });
         return;
     }
 
     parallaxItems.forEach(item => {
         const rate = parseFloat(item.getAttribute('data-parallax-rate')) || 0.5;
-        const scrollY = window.pageYOffset || window.scrollY;
+        const scrollY = window.scrollY;
 
         window.requestAnimationFrame(() => {
-            // translate3d включает аппаратное ускорение
             item.style.transform = `translate3d(0, ${scrollY * rate}px, 0)`;
-            item.style.webkitTransform = `translate3d(0, ${scrollY * rate}px, 0)`;
         });
     });
 }
