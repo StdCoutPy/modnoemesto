@@ -176,20 +176,26 @@
     width: auto;
 }
 
-
-@media (max-width: 1024px) {
-    .parallax-item {
-        /* Принудительно отключаем любые движения */
-        position: absolute !important;
-        transform: translate3d(0, 0, 0) !important;
-        -webkit-transform: translate3d(0, 0, 0) !important;
-
-        /* Запрещаем масштабирование */
-        background-size: cover;
-        height: 100% !important;
-        width: 100% !important;
-
-        /* Убираем инерцию трансформации */
-        transition: none !important;
+@media (max-width: 767px) {
+    /* Намертво фиксируем контейнер */
+    .parallax-container {
+        height: 100dvh !important;
+        min-height: -webkit-fill-available; /* Фикс для Safari */
+        overflow: hidden !important;
+        position: relative !important;
     }
+
+    /* Фоновый блок делаем абсолютно статичным */
+    .mobile-hero-bg {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background-attachment: scroll !important; /* ВАЖНО: не fixed */
+        transform: none !important;
+        will-change: auto !important;
+    }
+
+    /* Если JS все еще пытается найти parallax-item, мы его скрыли через hidden md:block */
 }

@@ -21,13 +21,17 @@
     </div>
 
     <!-- Полноэкранный Hero Section -->
-    <section class="h-[100dvh] md:h-screen w-full bg-black flex items-center justify-center overflow-hidden relative parallax-container">
+    <<section class="h-[100dvh] md:h-screen w-full bg-black flex items-center justify-center overflow-hidden relative parallax-container">
     <div class="absolute inset-0 z-0">
+        <!-- Основная картинка (скроем на мобилках) -->
         <img src="/static/images/hero-italian-fashion.jpg"
-             alt="Итальянская мода"
-             class="w-full h-full object-cover opacity-70 parallax-item will-change-transform"
-             data-parallax-rate="0.4"
-             style="transform: translateZ(0); -webkit-transform: translateZ(0);">
+             class="hidden md:block w-full h-full object-cover opacity-70 parallax-item"
+             data-parallax-rate="0.4">
+
+        <!-- Фоновый блок (только для мобилок) -->
+        <div class="block md:hidden absolute inset-0 bg-cover bg-center opacity-70 mobile-hero-bg"
+             style="background-image: url('/static/images/hero-italian-fashion.jpg');">
+        </div>
     </div>
 
         <div class="absolute inset-0 flex items-center justify-center text-center px-4 z-10">
