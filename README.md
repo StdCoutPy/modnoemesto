@@ -46,6 +46,9 @@
     <td width="33.3%" align="center">
       <img src="ReadmePhotos/9.png" width="100%" alt="Главное меню игры" style="border-radius: 8px; border: 1px solid #333;"/>
     </td>
+          <td width="33.3%" align="center">
+      <img src="ReadmePhotos/10.png" width="100%" alt="Главное меню игры" style="border-radius: 8px; border: 1px solid #333;"/>
+    </td>
   </tr>
 </table>
 
