@@ -6,6 +6,49 @@
 
 **Modnoe Mesto** — это полнофункциональная экосистема для e-commerce, разработанная с нуля. Проект демонстрирует архитектурный подход Senior-уровня: от кастомного дизайна до сложной инфраструктуры с интеграцией нейросетей, автоматизированным парсингом и высокой степенью защиты.
 
+## 📸 Галерея интерфейса (Screenshots)
+
+<table width="100%">
+  <tr>
+    <td width="33.3%" align="center">
+      <img src="ReadmePhotos/0.png" width="100%" alt="Главное меню игры" style="border-radius: 8px; border: 1px solid #333;"/>
+    </td>
+    <td width="33.3%" align="center">
+      <img src="ReadmePhotos/1.png" width="100%" alt="Магазин улучшений" style="border-radius: 8px; border: 1px solid #333;"/>
+    </td>
+    <td width="33.3%" align="center">
+      <img src="ReadmePhotos/2.png" width="100%" alt="Выбор боссов на карте" style="border-radius: 8px; border: 1px solid #333;"/>
+    </td>
+  </tr>
+   <tr>
+    <td width="33.3%" align="center">
+      <img src="ReadmePhotos/3.png" width="100%" alt="Главное меню игры" style="border-radius: 8px; border: 1px solid #333;"/>
+    </td>
+    <td width="33.3%" align="center">
+      <img src="ReadmePhotos/4.png" width="100%" alt="Магазин улучшений" style="border-radius: 8px; border: 1px solid #333;"/>
+    </td>
+    <td width="33.3%" align="center">
+      <img src="ReadmePhotos/5.png" width="100%" alt="Выбор боссов на карте" style="border-radius: 8px; border: 1px solid #333;"/>
+    </td>
+  </tr>
+   <tr>
+    <td width="33.3%" align="center">
+      <img src="ReadmePhotos/6.png" width="100%" alt="Главное меню игры" style="border-radius: 8px; border: 1px solid #333;"/>
+    </td>
+    <td width="33.3%" align="center">
+      <img src="ReadmePhotos/7.png" width="100%" alt="Магазин улучшений" style="border-radius: 8px; border: 1px solid #333;"/>
+    </td>
+    <td width="33.3%" align="center">
+      <img src="ReadmePhotos/8.png" width="100%" alt="Выбор боссов на карте" style="border-radius: 8px; border: 1px solid #333;"/>
+    </td>
+  </tr>
+    <tr>
+    <td width="33.3%" align="center">
+      <img src="ReadmePhotos/9.png" width="100%" alt="Главное меню игры" style="border-radius: 8px; border: 1px solid #333;"/>
+    </td>
+  </tr>
+</table>
+
 ## 🚀 Live Demo & Production
 *   <h1>Domain: <a href="https://modnoemesto.asia">modnoemesto.asia</a></h1>
 *   **Infrastructure:** Собственный VPS (Ubuntu 24.04), Docker, Nginx, SSL (Let's Encrypt).
